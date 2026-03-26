@@ -2,7 +2,7 @@
 
 > Built by **Amandeep Singh** | Full Stack MERN Developer
 
-A headless CMS-style developer blog with Markdown rendering, category filtering, full-text search, and rich article detail pages.
+A full-stack developer blog CMS with GraphQL API, JWT auth, admin panel, Three.js hero, syntax highlighting, nested comments, and rich animations.
 
 **🔗 Live Demo:** [coming soon](#)
 **📁 GitHub:** [github.com/nullcoderxxi/devblog](https://github.com/nullcoderxxi/devblog)
@@ -11,41 +11,63 @@ A headless CMS-style developer blog with Markdown rendering, category filtering,
 
 ## Tech Stack
 
-- **Next.js / React.js** (Vite)
-- **React Router** — client-side routing
-- **React Markdown** — full Markdown + code block rendering
-- **Framer Motion** — spring physics, 3D tilt, stagger, count-up
-- **GraphQL** *(backend-ready)*
-- **MongoDB** *(backend-ready)*
-- **Node.js / Express** *(backend-ready)*
-- **Tailwind CSS**
+**Frontend**
+- React.js + Vite
+- Three.js + React Three Fiber — 3D particle hero background
+- Framer Motion — spring physics, 3D tilt, stagger, AnimatePresence
+- Apollo Client v4 — GraphQL state management
+- React Markdown + React Syntax Highlighter — article rendering
+- React Router DOM
+
+**Backend**
+- Node.js + Express
+- Apollo Server v4 + GraphQL
+- MongoDB + Mongoose
+- JWT Authentication + bcrypt
+- RESTful health endpoint
+
+---
 
 ## Features
 
-- Home page with featured & all articles grid
-- 3D tilt effect on every post card (mouse tracking)
-- Full Markdown article rendering with code blocks
-- Category filter sidebar with post counts
-- Popular tags cloud with hover animations
-- Most-read posts panel
-- Full-text search with animated expanding input
-- Article detail with like / save / share actions
-- Sticky author card & article info panel
-- Related articles section
-- Animated count-up stats bar
-- Fully responsive (mobile / tablet / desktop)
+- 🎨 Three.js animated particle hero with floating cubes
+- 🔐 JWT auth — sign up, sign in, admin access
+- ⚡ Admin panel — create / edit / delete posts (Markdown editor)
+- 💬 Nested comment system (requires auth)
+- 📊 Live stats bar with count-up animations
+- 🃏 3D tilt post cards with mouse tracking
+- ✨ Syntax highlighted code blocks with copy button
+- 📖 Reading progress bar
+- 🔍 Full-text search with animated expand
+- 📱 Fully responsive (mobile / tablet / desktop)
+- 🏷️ Category + tag filtering
+- 📌 Sticky author sidebar
+- 🌓 Dark glassmorphism design
+
+---
 
 ## Getting Started
 
+### 1. Frontend
 ```bash
 npm install
+cp .env.example .env   # set VITE_GRAPHQL_URL
 npm run dev
 ```
 
-## Build
-
+### 2. Backend
 ```bash
-npm run build
+cd server
+npm install
+cp .env.example .env   # set MONGO_URI and JWT_SECRET
+npm run dev
+```
+
+### 3. Seed Database
+```bash
+cd server
+npm run seed
+# Admin: amandeepsiingh22@gmail.com / Admin@123
 ```
 
 ---

@@ -1,24 +1,30 @@
 import './index.css';
-import { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { ApolloProvider } from '@apollo/client/react';
+import { client } from './graphql/client';
+import { AuthProvider } from './context/AuthContext';
 import Navbar from './components/Navbar';
 import TechBadges from './components/TechBadges';
 import Home from './pages/Home';
 import PostDetail from './pages/PostDetail';
+import Admin from './pages/Admin';
 
 export default function App() {
-  const [searchQuery, setSearchQuery] = useState('');
-
   return (
-    <BrowserRouter>
-      <div style={{ background: '#0c0e16', minHeight: '100vh' }}>
-        <Navbar onSearch={setSearchQuery} />
-        <Routes>
-          <Route path="/" element={<Home searchQuery={searchQuery} />} />
-          <Route path="/post/:slug" element={<PostDetail />} />
-        </Routes>
-        <TechBadges />
-      </div>
-    </BrowserRouter>
+    <ApolloProvider client={client}>
+      <AuthProvider>
+        <BrowserRouter>
+          <div style={{ background: '#0c0e16', minHeight: '100vh' }}>
+            <Navbar />
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/post/:slug" element={<PostDetail />} />
+              <Route path="/admin" element={<Admin />} />
+            </Routes>
+            <TechBadges />
+          </div>
+        </BrowserRouter>
+      </AuthProvider>
+    </ApolloProvider>
   );
 }

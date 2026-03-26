@@ -1,7 +1,15 @@
 import { motion } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
-import { stats } from '../data/posts';
+import { useQuery } from '@apollo/client/react';
+import { GET_STATS } from '../graphql/queries';
 import useCountUp from '../hooks/useCountUp';
+
+const FALLBACK = [
+  { label: 'Articles', value: 6, icon: '📝', color: '#6366f1' },
+  { label: 'Total Views', value: 18540, icon: '👁️', color: '#10b981' },
+  { label: 'Comments', value: 0, icon: '💬', color: '#f59e0b' },
+  { label: 'Topics', value: 6, icon: '🏷️', color: '#8b5cf6' },
+];
 
 function StatCard({ stat, delay }) {
   const [ref, inView] = useInView({ triggerOnce: true });
@@ -23,9 +31,19 @@ function StatCard({ stat, delay }) {
 }
 
 export default function StatsBar() {
+  const { data } = useQuery(GET_STATS);
+  const s = data?.getStats;
+
+  const statsArr = s ? [
+    { label: 'Articles', value: s.totalPosts, icon: '📝', color: '#6366f1' },
+    { label: 'Total Views', value: s.totalViews, icon: '👁️', color: '#10b981' },
+    { label: 'Comments', value: s.totalComments, icon: '💬', color: '#f59e0b' },
+    { label: 'Authors', value: s.totalAuthors, icon: '👤', color: '#8b5cf6' },
+  ] : FALLBACK;
+
   return (
     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(130px, 1fr))', gap: '14px' }}>
-      {stats.map((s, i) => <StatCard key={s.label} stat={s} delay={i * 0.08} />)}
+      {statsArr.map((stat, i) => <StatCard key={stat.label} stat={stat} delay={i * 0.08} />)}
     </div>
   );
 }

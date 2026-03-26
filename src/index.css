@@ -1,0 +1,47 @@
+@import "tailwindcss";
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { background: #0c0e16; color: #fff; font-family: 'Inter', 'Segoe UI', sans-serif; overflow-x: hidden; }
+#root { width: 100%; min-height: 100vh; }
+
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: #0c0e16; }
+::-webkit-scrollbar-thumb { background: #6366f1; border-radius: 3px; }
+
+.glass {
+  background: rgba(255,255,255,0.04);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+}
+
+.prose p { color: #a0aec0; font-size: 15px; line-height: 1.8; margin-bottom: 16px; }
+.prose h2 { color: #fff; font-size: 20px; font-weight: 700; margin: 28px 0 12px; }
+.prose h3 { color: #e2e8f0; font-size: 17px; font-weight: 600; margin: 20px 0 10px; }
+.prose code { background: rgba(99,102,241,0.15); color: #a5b4fc; padding: 2px 7px; border-radius: 4px; font-size: 13px; font-family: monospace; }
+.prose pre { background: #1a1d2e; border: 1px solid rgba(99,102,241,0.2); border-radius: 10px; padding: 16px; overflow-x: auto; margin: 16px 0; }
+.prose pre code { background: none; color: #e2e8f0; padding: 0; }
+.prose ul { color: #a0aec0; padding-left: 20px; margin-bottom: 16px; }
+.prose ul li { margin-bottom: 6px; line-height: 1.7; }
+.prose blockquote { border-left: 3px solid #6366f1; padding-left: 16px; color: #718096; font-style: italic; margin: 16px 0; }
+.prose a { color: #818cf8; text-decoration: underline; }
+.prose strong { color: #e2e8f0; font-weight: 700; }
+
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+@keyframes pulse-glow { 0%,100%{box-shadow:0 0 8px rgba(99,102,241,0.3)} 50%{box-shadow:0 0 25px rgba(99,102,241,0.7)} }
+@keyframes shimmer { 0%{background-position:-200% 0} 100%{background-position:200% 0} }
+@keyframes spin-slow { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
+
+.blink { animation: blink 1.5s infinite; }
+.float { animation: float 3s ease-in-out infinite; }
+.pulse-glow { animation: pulse-glow 2s infinite; }
+.spin-slow { animation: spin-slow 20s linear infinite; }
+
+.skeleton {
+  background: linear-gradient(90deg, rgba(255,255,255,0.04) 25%, rgba(255,255,255,0.08) 50%, rgba(255,255,255,0.04) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+  border-radius: 6px;
+}
